@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fake Chat App</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial;
+}
+
+body{
+    background:#0f172a;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.container{
+    width:500px;
+    height:700px;
+    background:#1e293b;
+    border-radius:22px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 0 25px rgba(0,0,0,0.4);
+}
+
+.top{
+    background:#334155;
+    padding:18px;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.chat{
+    flex:1;
+    padding:20px;
+    overflow:auto;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.message{
+    max-width:75%;
+    padding:14px;
+    border-radius:14px;
+    line-height:1.6;
+    word-wrap:break-word;
+}
+
+.user{
+    background:#22c55e;
+    color:white;
+    align-self:flex-end;
+}
+
+.bot{
+    background:#334155;
+    color:white;
+    align-self:flex-start;
+}
+
+.bottom{
+    display:flex;
+    gap:10px;
+    padding:15px;
+    background:#1e293b;
+}
+
+input{
+    flex:1;
+    padding:15px;
+    border:none;
+    border-radius:12px;
+    background:#334155;
+    color:white;
+    outline:none;
+}
+
+button{
+    padding:15px 20px;
+    border:none;
+    border-radius:12px;
+    background:#22c55e;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:hover{
+    background:#16a34a;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="top">
+        💬 Fake Chat App
+    </div>
+
+    <div class="chat" id="chat">
+
+        <div class="message bot">
+            Salom 👋
+        </div>
+
+    </div>
+
+    <div class="bottom">
+
+        <input
+        type="text"
+        id="input"
+        placeholder="Message yozing...">
+
+        <button onclick="sendMessage()">
+            Send
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+function sendMessage(){
+
+    let input =
+    document.getElementById("input");
+
+    let text =
+    input.value;
+
+    let chat =
+    document.getElementById("chat");
+
+    if(text.trim() === "") return;
+
+    chat.innerHTML += `
+    
+        <div class="message user">
+            ${text}
+        </div>
+
+    `;
+
+    input.value = "";
+
+    chat.scrollTop =
+    chat.scrollHeight;
+
+    setTimeout(() => {
+
+        let replies = [
+
+            "Qiziq 😄",
+
+            "Davom eting...",
+
+            "Zo‘r gap 👌",
+
+            "Tushundim ✅",
+
+            "Yana yozing 🚀"
+
+        ];
+
+        let random =
+        replies[
+            Math.floor(
+                Math.random() * replies.length
+            )
+        ];
+
+        chat.innerHTML += `
+        
+            <div class="message bot">
+                ${random}
+            </div>
+
+        `;
+
+        chat.scrollTop =
+        chat.scrollHeight;
+
+    },1000);
+}
+
+</script>
+
+</body>
+</html>
